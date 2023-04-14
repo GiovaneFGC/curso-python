@@ -1,6 +1,6 @@
 import random
 while True:
-    a = int(input('quantos jogos?'))
+    a = int(input(' quantos jogos?'))
     if a == 0:
         quit()
     for a in range (1,a+1):
