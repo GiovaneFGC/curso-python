@@ -1,11 +1,6 @@
 import hashlib
 import random
 
-
-
-
-
-
 senha = input ('insira sua senha:')
 print ('sua senha é:', senha) 
 r = random.randint(0,99999999999)
