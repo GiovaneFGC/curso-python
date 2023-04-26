@@ -22,6 +22,22 @@ def score():
     c.close()
     return dict(lista)
 
+def excluir_id(id: int):
+    c = sqlite3.connect('/Users/Ijovem01/coursepython/database/tatoo.db')
+    cr = c.cursor()
+    cr.execute("""delete from clientes where id = ?""", (id,))
+    c.commit()
+    c.close()
+    return 0
+
+def excluir_registro(cpf: str):
+    c = sqlite3.connect('/Users/Ijovem01/coursepython/database/tatoo.db')
+    cr = c.cursor()
+    cr.execute("""delete from clientes where cpf = ?""", (cpf,))
+    c.commit()
+    c.close()
+    return 0
+
 @app.post("/gravar")
 def gravar(c: cliente):
     msg = "Gracias Sr/Sra seu CPF está inválido: " + c.nome + " " + c.cpf
@@ -32,10 +48,16 @@ def atualizar(c: cliente):
     msg = "Gracias Sr/Sra seus dados foram atualizados com sucesso: " + c.nome + " " + c.cpf
     return {"msg": msg}
 
-@app.delete("/excluir")
-def excluir(cpf: str, nome: str):
-    msg = "Gracias Sr/Sra seus dados foram excluidos com sucesso: "
-    return {"msg": msg}
+@app.delete("/excluirid/{id}")
+def excluir(id: int):
+    excluir_id(id)
+    return 0
+
+
+@app.delete("/excluir/{cpf}")
+def excluir(cpf: str):
+    excluir_registro(cpf)
+    return 0
 
 @app.get("/listar_clientes")
 def listar_clientes():
